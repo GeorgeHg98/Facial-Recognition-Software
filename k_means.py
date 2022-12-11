@@ -81,9 +81,9 @@ def computeJ(miu, clusters):
 
 def k_means(img_path):
     k = 1
-    # k = 6
+    
     img = Image.open(img_path, 'r')
-    # img = Image.open("vibrant.jpg", 'r')
+    
     width, height = img.size
     basewidth = 300
 
@@ -110,7 +110,7 @@ def k_means(img_path):
 
     while shouldContinue:
 
-        # assign pixels to clusters
+       
         for pixel in pixels_value:
             closestCentroid = None
             distanceToCentroid = 999999
@@ -121,7 +121,7 @@ def k_means(img_path):
                     closestCentroid = m
             clusters[miu.index(closestCentroid)].append(pixel)
 
-        # reposition centroids
+       
         for i in range(len(miu)):
             miu[i] = computeCentroid(miu[i], clusters[i])
 
@@ -129,7 +129,7 @@ def k_means(img_path):
             if former_miu == miu:
                 shouldContinue = False
                 break
-        # former_miu = miu
+        
         for i in range(len(miu)):
             former_miu[i] = miu[i]
         
@@ -140,7 +140,7 @@ def k_means(img_path):
 
         former_clusers = list(clusters)
 
-        # compute and compare J
+        
         J = computeJ(miu, clusters)
 
         if previous_J[0] != None:
@@ -153,7 +153,7 @@ def k_means(img_path):
         previous_J[2] = J[2]
         previous_J = tuple(previous_J)
 
-        # reset clusters
+       
         clusters = list()
         for i in range(k):
             clusters.append(list())

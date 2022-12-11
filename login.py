@@ -1,19 +1,26 @@
-       
 import cv2
-import numpy
-import pickle
-import face_recognition
+import facial_recognition as fr
+
+recognizer = fr.facial_recognition()
 
 def login():
-        resultedName = s.recognize_feed(video_capture= cv2.VideoCapture(0))
+        resultedName = recognizer.recognize_feed(video_capture= cv2.VideoCapture(0))
 
         return validate(resultedName)
 
-
-def validate(name):
+def validate():
+        resultedName = recognizer.recognize_feed(video_capture= cv2.VideoCapture(0))
+        print(resultedName)
         if resultedName == "George Husac":
-            return True
-        return False 
+            return (True, resultedName)
+        return (False, resultedName) 
 
-s = face_recognition()
-resultedName = s.recognize_feed(video_capture= cv2.VideoCapture(0))
+valid = validate()
+
+if valid[0] == True:
+        print('Welcome to the App ' + valid[1] + '!')
+
+else: print("Unauthorized Access")
+
+
+

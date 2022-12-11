@@ -21,14 +21,14 @@ try:
         for j in jobs_file:
             jobs.append(j.split(":")[0])
 
-
         persons = pickle.load(open("faces.p", "rb"))
 
         mycursor = conn.cursor()
 
-        for person in persons:
-            names = list(person.keys())[0].split(" ")
-            print(names)
+        for person in list(persons):
+            
+            names =person.split(" ")
+            
             firstname_list = names[:-1]
             firstname = ""
             for fn in firstname_list:
@@ -36,13 +36,13 @@ try:
             firstname = firstname[:-1]
             lastname = names[-1]
             
-            if firstname != "Klaus" and lastname != "Iohannis":
+            if firstname != "George" and lastname != "Husac":
                 if (firstname):
                     path_name = firstname + " " + lastname
                 else:
                     path_name = lastname
                 path_name = path_name.replace(" ", "_")
-                img_path = "/home/cris/Licenta/Licenta/Faces/lfwcrop_color/faces/" + path_name + "_0001.ppm"
+                img_path = "Resources/faceToAdd/George Husac.jpg"
     
 
                 skin_tone = km.k_means(img_path)
@@ -56,7 +56,7 @@ try:
 
             # print(firstname)
             # print(lastname)
-            print(skin_tone)
+            # print(skin_tone)
 
             sql = "INSERT INTO persons (firstname, lastname, age, skin_tone, job, birth_place, address) VALUES (%s, %s, %s, %s, %s, %s, %s);"
             val = (firstname, lastname, int(age), skin_tone, job, loc, add)
